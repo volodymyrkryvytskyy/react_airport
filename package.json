@@ -5,7 +5,7 @@
   "keywords": [],
   "author": "Mate Academy",
   "license": "GPL-3.0",
-  "homepage": "https://volodymyrkryvytskyy.github.com/react_airport",
+  "homepage": "https://volodymyrkryvytskyy.github.io/react_airport",
   "dependencies": {
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
