@@ -9,11 +9,10 @@ class App extends Component {
     this.state = {
       currentPage: 'Arrivals'
     }
-    this.handleClick = this.handleClick.bind(this)
   }
   
 
-  handleClick(event) {
+  handleClick = (event) => {
     event.persist();
     this.setState({currentPage: event.target.textContent})
   }
