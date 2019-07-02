@@ -9,9 +9,9 @@
 
 .AppTable {
   margin: auto;
-  -webkit-box-shadow: 0px 4px 24px 0px #85d5d9;
-  -moz-box-shadow: 0px 4px 24px 0px #85d5d9;
-  box-shadow: 0px 4px 24px 0px #85d5d9;
+  -webkit-box-shadow: 0 4px 24px 0 #85d5d9;
+  -moz-box-shadow: 0 4px 24px 0 #85d5d9;
+  box-shadow: 0 4px 24px 0 #85d5d9;
   border-radius: 19px;
   -moz-border-radius: 19px;
   -webkit-border-radius: 19px;

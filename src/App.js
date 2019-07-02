@@ -1,60 +1,78 @@
-import React, { Component } from "react";
-import "./App.css";
-import Arrivals from "./Arrivals";
-import Departures from "./Departures";
+import React, { Component } from 'react';
+import './App.css';
+import Arrivals from './Arrivals';
+import Departures from './Departures';
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       currentPage: 'Arrivals',
-      currentDay: 'Today'
-    }
+      currentDay: 'Today',
+    };
   }
 
-  handleClick = (event) => {
-    event.persist();
-    this.setState({currentPage: event.target.textContent})
+  handleClick(eventClick) {
+    eventClick.persist();
+    this.setState({ currentPage: eventClick.target.textContent });
   }
 
   render() {
+    const { currentDay, currentPage } = this.state;
     return (
       <div className="App">
         <div className="typeContainer">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/2/23/Flugzeug_mit_Nase_nach_oben.svg"
-          alt="departures"
-          className="departureImg"
-        />
-        <button onClick={this.handleClick} className="typeButton">Departures</button>
-        <button onClick={this.handleClick} className="typeButton">Arrivals</button>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/0/03/Flugzeug_mit_Nase_nach_unten.svg"
-          alt="arrivals"
-          className="arrivalImg"
-        />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/2/23/
+            Flugzeug_mit_Nase_nach_oben.svg"
+            alt="departures"
+            className="departureImg"
+          />
+          <button
+            onClick={() => this.handleClick()}
+            className="typeButton"
+            type="submit"
+          >
+            Departures
+          </button>
+          <button
+            onClick={() => this.handleClick()}
+            className="typeButton"
+            type="submit"
+          >
+            Arrivals
+          </button>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/03/
+            Flugzeug_mit_Nase_nach_unten.svg"
+            alt="arrivals"
+            className="arrivalImg"
+          />
         </div>
         <div className="pickADate">
           <button
+            type="submit"
             onClick={() => this.setState({ currentDay: 'Yesterday' })}
-            className='dateButton'
+            className="dateButton"
           >
             Yesterday
           </button>
           <button
+            type="submit"
             onClick={() => this.setState({ currentDay: 'Today' })}
-            className='dateButton'
+            className="dateButton"
           >
             Today
           </button>
           <button
+            type="submit"
             onClick={() => this.setState({ currentDay: 'Tomorrow' })}
-            className='dateButton'
+            className="dateButton"
           >
             Tomorrow
           </button>
         </div>
-        <h3>{this.state.currentPage + ` for ` + this.state.currentDay}</h3>
+        <h3>{`${currentPage} for ${currentDay}`}</h3>
         <table className="AppTable">
           <thead className="tableHead">
             <tr>
@@ -67,9 +85,11 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.currentPage === 'Arrivals'
-              ? <Arrivals currentDay={this.state.currentDay} />
-              : <Departures currentDay={this.state.currentDay} />}
+            {currentPage === 'Arrivals' ? (
+              <Arrivals currentDay={currentDay} />
+            ) : (
+              <Departures currentDay={currentDay} />
+            )}
           </tbody>
         </table>
       </div>
