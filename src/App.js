@@ -23,28 +23,26 @@ class App extends Component {
       <div className="App">
         <div className="typeContainer">
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/2/23/
-            Flugzeug_mit_Nase_nach_oben.svg"
+            src="https://bit.ly/2YB0YpL"
             alt="departures"
             className="departureImg"
           />
           <button
-            onClick={() => this.handleClick()}
+            onClick={eventClick => this.handleClick(eventClick)}
             className="typeButton"
             type="submit"
           >
             Departures
           </button>
           <button
-            onClick={() => this.handleClick()}
+            onClick={eventClick => this.handleClick(eventClick)}
             className="typeButton"
             type="submit"
           >
             Arrivals
           </button>
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/03/
-            Flugzeug_mit_Nase_nach_unten.svg"
+            src="https://bit.ly/2xrC5Ri"
             alt="arrivals"
             className="arrivalImg"
           />
