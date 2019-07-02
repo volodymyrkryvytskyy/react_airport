@@ -21,6 +21,35 @@ class Arrivals extends Component {
 
   render() {
     const arrivalsData = [...this.state.arrivals]
+    .filter(flight => {
+      const arrivalDate = new Date(flight.timeArrShedule).toLocaleDateString("ru-RU");
+      const lookupDate = new Date();
+      if (this.props.currentDay === "Yesterday") {
+        lookupDate.setDate(lookupDate.getDate() - 1);
+
+        return (
+          arrivalDate.slice(0, 5) ===
+          lookupDate.toLocaleDateString("ru-Ru").slice(0, 5)
+        );
+      }
+      if (this.props.currentDay === "Today") {
+
+        return (
+          arrivalDate.slice(0, 5) ===
+          lookupDate.toLocaleDateString("ru-Ru").slice(0, 5)
+        );
+      }
+      if (this.props.currentDay === "Tomorrow") {
+        lookupDate.setDate(lookupDate.getDate() + 1);
+
+        return (
+          arrivalDate.slice(0, 5) ===
+          lookupDate.toLocaleDateString("ru-Ru").slice(0, 5)
+        );
+      }
+
+      return flight;
+    })
       .map(flight => {
 
         const localTime = new Date(flight.timeArrShedule)
