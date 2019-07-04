@@ -9,16 +9,23 @@ class App extends Component {
     this.state = {
       currentPage: 'Arrivals',
       currentDay: 'Today',
+      dateMap : {
+        'Yesterday': -1,
+        'Tomorrow': +1
+      },
     };
   }
 
-  handleClick(eventClick) {
-    eventClick.persist();
-    this.setState({ currentPage: eventClick.target.textContent });
+  handleClick = (target) => {
+    this.setState({ currentPage: target });
+  }
+
+  setCurrentDay = (day) => {
+    this.setState({ currentDay: day})
   }
 
   render() {
-    const { currentDay, currentPage } = this.state;
+    const { currentDay, currentPage, dateMap} = this.state;
     return (
       <div className="App">
         <div className="typeContainer">
@@ -28,14 +35,14 @@ class App extends Component {
             className="departureImg"
           />
           <button
-            onClick={eventClick => this.handleClick(eventClick)}
+            onClick={() => this.handleClick('Departures')}
             className="typeButton"
             type="submit"
           >
             Departures
           </button>
           <button
-            onClick={eventClick => this.handleClick(eventClick)}
+            onClick={() => this.handleClick('Arrivals')}
             className="typeButton"
             type="submit"
           >
@@ -50,21 +57,21 @@ class App extends Component {
         <div className="pickADate">
           <button
             type="submit"
-            onClick={() => this.setState({ currentDay: 'Yesterday' })}
+            onClick={() => this.setCurrentDay('Yesterday')}
             className="dateButton"
           >
             Yesterday
           </button>
           <button
             type="submit"
-            onClick={() => this.setState({ currentDay: 'Today' })}
+            onClick={() => this.setCurrentDay('Today')}
             className="dateButton"
           >
             Today
           </button>
           <button
             type="submit"
-            onClick={() => this.setState({ currentDay: 'Tomorrow' })}
+            onClick={() => this.setCurrentDay('Tomorrow')}
             className="dateButton"
           >
             Tomorrow
@@ -84,9 +91,15 @@ class App extends Component {
           </thead>
           <tbody>
             {currentPage === 'Arrivals' ? (
-              <Arrivals currentDay={currentDay} />
+              <Arrivals
+                currentDay={currentDay}
+                dateMap={dateMap}
+              />
             ) : (
-              <Departures currentDay={currentDay} />
+                <Departures
+                  currentDay={currentDay}
+                  dateMap={dateMap}
+                />
             )}
           </tbody>
         </table>
