@@ -17,7 +17,8 @@
   -webkit-border-radius: 19px;
   border: 3px solid #85d5d9;
   padding: 3px;
-  width: 70%;
+  table-layout: fixed ;
+  width: 70% ;
   border-collapse: collapse;
 }
 
@@ -26,8 +27,8 @@
   background-color: #85d5d9;
 }
 
-.departureImg,
-.arrivalImg {
+.departure-bg-img,
+.arrival-bg-img {
   width: 40px;
   height: 40px;
 }

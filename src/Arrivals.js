@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlightsTable from './FlightsTable';
-import { getData } from './service';
+import getData from './service';
+import flightsData from './helper';
 
 class Arrivals extends Component {
   constructor(props) {
@@ -20,35 +21,17 @@ class Arrivals extends Component {
 
   render() {
     const { arrival } = this.state;
-    const { currentDay, dateMap } = this.props;
-    const arrivalsData = arrival.filter((flight) => {
-      const arrivalDate = new Date(flight.timeArrShedule)
-        .toLocaleDateString('ru-RU');
-      const lookupDate = new Date();
+    const { currentDay, dateMap, type } = this.props;
+    const arrivalsData = flightsData(arrival, dateMap, currentDay);
 
-      const currentDayCheck = (day) => {
-        if (dateMap.hasOwnProperty(day)) {
-          lookupDate.setDate(lookupDate.getDate() + dateMap[day]);
-        }
-      };
-      currentDayCheck(currentDay);
-
-      return (
-        arrivalDate.slice(0, 5)
-        === lookupDate.toLocaleDateString('ru-Ru').slice(0, 5)
-      );
-    });
-    return (
-      <FlightsTable
-        flightsList={arrivalsData}
-      />
-    );
+    return <FlightsTable flightsList={arrivalsData} pageType={type} />;
   }
 }
 
 Arrivals.propTypes = {
   currentDay: PropTypes.string.isRequired,
-  dateMap: PropTypes.object.isRequired,
+  dateMap: PropTypes.objectOf(PropTypes.number).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Arrivals;
