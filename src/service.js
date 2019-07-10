@@ -1,4 +1,4 @@
-const getData = async(type) => {
+const getData = async() => {
   const currentDate = new Date()
     .toLocaleDateString('ru-RU')
     .replace(/\./g, '-');
@@ -6,7 +6,7 @@ const getData = async(type) => {
   const dataPromise = await fetch(url);
   const fetchedData = await dataPromise.json();
 
-  return fetchedData.body[type];
+  return fetchedData.body;
 };
 
 export default getData;

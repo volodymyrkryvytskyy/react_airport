@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import Arrivals from './Arrivals';
 import Departures from './Departures';
-
+import getData from './service';
 
 const TYPE_DEPARTURES = 'Departures'
 const TYPE_ARRIVALS = 'Arrivals'
 const YESTERDAY = 'Yesterday'
 const TODAY = 'Today'
 const TOMORROW = 'Tomorrow'
-
 
 class App extends Component {
   constructor() {
@@ -19,12 +18,26 @@ class App extends Component {
       currentDay: TODAY,
       dateMap : {
         'Yesterday': -1,
+        'Today' : 0,
         'Tomorrow': +1
       },
+      allFlights: [],
     };
   }
 
-  handleClick = (target) => {
+  componentDidMount() { 
+    this.takeData();
+  }
+
+  async takeData() {
+    const fetchedData = await getData();
+   
+    this.setState({
+      allFlights: fetchedData,
+    });
+  }
+
+  setCurrentPage = (target) => {
     this.setState({ currentPage: target });
   }
 
@@ -43,14 +56,14 @@ class App extends Component {
             className="departure-bg-img"
           />
           <button
-            onClick={() => this.handleClick(TYPE_DEPARTURES)}
+            onClick={() => this.setCurrentPage(TYPE_DEPARTURES)}
             className="typeButton"
             type="submit"
           >
             Departures
           </button>
           <button
-            onClick={() => this.handleClick(TYPE_ARRIVALS)}
+            onClick={() => this.setCurrentPage(TYPE_ARRIVALS)}
             className="typeButton"
             type="submit"
           >
@@ -98,19 +111,20 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {currentPage === TYPE_ARRIVALS ? (
-              <Arrivals
+
+            {currentPage === TYPE_ARRIVALS ?
+              (<Arrivals
                 currentDay={currentDay}
                 dateMap={dateMap}
                 type={TYPE_ARRIVALS}
-              />
-            ) : (
-                <Departures
+              />)
+              : (<Departures
                   currentDay={currentDay}
                   dateMap={dateMap}
                   type={TYPE_DEPARTURES}
-                />
-            )}
+                />)
+            }
+            
           </tbody>
         </table>
       </div>

@@ -1,28 +1,45 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlightsTable from './FlightsTable';
-import getData from './service';
 import flightsData from './helper';
+import getData from './service';
 
 class Arrivals extends Component {
   constructor(props) {
     super(props);
-    this.takeData();
     this.state = {
       arrival: [],
+      arrivalsData: [],
     };
   }
 
-  async takeData() {
-    const fetchedArrival = await getData('arrival');
+  componentDidMount() {
+    this.takeData();
+  }
 
-    this.setState({ arrival: fetchedArrival });
+  componentDidUpdate(prevProps) {
+    const { currentDay, dateMap } = this.props;
+    if (currentDay !== prevProps.currentDay) {
+      this.setState((prevState) => {
+        return {
+          arrivalsData: flightsData(prevState.arrival, dateMap, currentDay),
+        };
+      });
+    }
+  }
+
+  async takeData() {
+    const { arrival } = await getData();
+    const { currentDay, dateMap } = this.props;
+    this.setState({
+      arrival,
+      arrivalsData: flightsData(arrival, dateMap, currentDay),
+    });
   }
 
   render() {
-    const { arrival } = this.state;
-    const { currentDay, dateMap, type } = this.props;
-    const arrivalsData = flightsData(arrival, dateMap, currentDay);
+    const { type } = this.props;
+    const { arrivalsData } = this.state;
 
     return <FlightsTable flightsList={arrivalsData} pageType={type} />;
   }

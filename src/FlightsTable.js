@@ -4,12 +4,12 @@ const FlightsTable = ({ flightsList, pageType }) => {
   const flightTimeType = pageType === 'Arrivals'
     ? 'timeToStand'
     : 'timeDepShedule';
-  const arrivalsTable = flightsList.map((flight) => {
+  return flightsList.map((flight) => {
     const localTime = new Date(flight[flightTimeType])
       .toTimeString()
       .slice(0, 5);
     return (
-      <tr className="arrivals" key={flight.fltNo + flight.status}>
+      <tr className="flights" key={flight.fltNo + flight.status}>
         <td>{flight.term}</td>
         <td>{localTime}</td>
         <td>{flight['airportFromID.city'] || flight['airportToID.city']}</td>
@@ -19,8 +19,6 @@ const FlightsTable = ({ flightsList, pageType }) => {
       </tr>
     );
   });
-
-  return (arrivalsTable);
 };
 
 export default FlightsTable;

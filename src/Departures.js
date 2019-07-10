@@ -9,20 +9,37 @@ class Departures extends Component {
     super(props);
     this.state = {
       departure: [],
+      departuresData: [],
     };
+  }
+
+  componentDidMount() {
     this.takeData();
   }
 
-  async takeData() {
-    const fetchedDeparture = await getData('departure');
+  componentDidUpdate(prevProps) {
+    const { currentDay, dateMap } = this.props;
+    if (currentDay !== prevProps.currentDay) {
+      this.setState((prevState) => {
+        return {
+          departuresData: flightsData(prevState.departure, dateMap, currentDay),
+        };
+      });
+    }
+  }
 
-    this.setState({ departure: fetchedDeparture });
+  async takeData() {
+    const { departure } = await getData();
+    const { currentDay, dateMap } = this.props;
+    this.setState({
+      departure,
+      departuresData: flightsData(departure, dateMap, currentDay),
+    });
   }
 
   render() {
-    const { departure } = this.state;
-    const { currentDay, dateMap, type } = this.props;
-    const departuresData = flightsData(departure, dateMap, currentDay);
+    const { type } = this.props;
+    const { departuresData } = this.state;
 
     return <FlightsTable flightsList={departuresData} pageType={type} />;
   }
