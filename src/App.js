@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
-import Arrivals from './Arrivals';
-import Departures from './Departures';
+import Flights from './Flights';
 import getData from './service';
 
-const TYPE_DEPARTURES = 'Departures'
-const TYPE_ARRIVALS = 'Arrivals'
+const TYPE_DEPARTURES = 'departure'
+const TYPE_ARRIVALS = 'arrival'
 const YESTERDAY = 'Yesterday'
 const TODAY = 'Today'
 const TOMORROW = 'Tomorrow'
@@ -16,11 +15,6 @@ class App extends Component {
     this.state = {
       currentPage: TYPE_ARRIVALS,
       currentDay: TODAY,
-      dateMap : {
-        'Yesterday': -1,
-        'Today' : 0,
-        'Tomorrow': +1
-      },
       allFlights: [],
     };
   }
@@ -37,8 +31,8 @@ class App extends Component {
     });
   }
 
-  setCurrentPage = (target) => {
-    this.setState({ currentPage: target });
+  setCurrentPage = (pageType) => {
+    this.setState({ currentPage: pageType });
   }
 
   setCurrentDay = (day) => {
@@ -46,7 +40,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentDay, currentPage, dateMap} = this.state;
+    const { currentDay, currentPage} = this.state;
     return (
       <div className="App">
         <div className="typeContainer">
@@ -58,14 +52,14 @@ class App extends Component {
           <button
             onClick={() => this.setCurrentPage(TYPE_DEPARTURES)}
             className="typeButton"
-            type="submit"
+            type="button"
           >
             Departures
           </button>
           <button
             onClick={() => this.setCurrentPage(TYPE_ARRIVALS)}
             className="typeButton"
-            type="submit"
+            type="button"
           >
             Arrivals
           </button>
@@ -77,28 +71,28 @@ class App extends Component {
         </div>
         <div className="pickADate">
           <button
-            type="submit"
+            type="button"
             onClick={() => this.setCurrentDay(YESTERDAY)}
             className="dateButton"
           >
             Yesterday
           </button>
           <button
-            type="submit"
+            type="button"
             onClick={() => this.setCurrentDay(TODAY)}
             className="dateButton"
           >
             Today
           </button>
           <button
-            type="submit"
+            type="button"
             onClick={() => this.setCurrentDay(TOMORROW)}
             className="dateButton"
           >
             Tomorrow
           </button>
         </div>
-        <h3>{`${currentPage} for ${currentDay}`}</h3>
+        <h3>{`${currentPage}s for ${currentDay}`}</h3>
         <table className="AppTable">
           <thead className="tableHead">
             <tr>
@@ -110,21 +104,12 @@ class App extends Component {
               <th>Flight</th>
             </tr>
           </thead>
-          <tbody>
 
-            {currentPage === TYPE_ARRIVALS ?
-              (<Arrivals
-                currentDay={currentDay}
-                dateMap={dateMap}
-                type={TYPE_ARRIVALS}
-              />)
-              : (<Departures
-                  currentDay={currentDay}
-                  dateMap={dateMap}
-                  type={TYPE_DEPARTURES}
-                />)
-            }
-            
+          <tbody>
+            <Flights
+              currentDay={currentDay}
+              type={currentPage}
+            /> 
           </tbody>
         </table>
       </div>

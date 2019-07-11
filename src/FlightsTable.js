@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FlightsTable = ({ flightsList, pageType }) => {
-  const flightTimeType = pageType === 'Arrivals'
+  const flightTimeType = pageType === 'arrival'
     ? 'timeToStand'
     : 'timeDepShedule';
   return flightsList.map((flight) => {
