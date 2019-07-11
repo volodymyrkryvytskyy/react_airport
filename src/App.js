@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import Flights from './Flights';
-import getData from './service';
 
-const TYPE_DEPARTURES = 'departure'
-const TYPE_ARRIVALS = 'arrival'
-const YESTERDAY = 'Yesterday'
-const TODAY = 'Today'
-const TOMORROW = 'Tomorrow'
+const TYPE_DEPARTURES = 'departure';
+const TYPE_ARRIVALS = 'arrival';
+const YESTERDAY = 'Yesterday';
+const TODAY = 'Today';
+const TOMORROW = 'Tomorrow';
 
 class App extends Component {
   constructor() {
@@ -15,20 +14,7 @@ class App extends Component {
     this.state = {
       currentPage: TYPE_ARRIVALS,
       currentDay: TODAY,
-      allFlights: [],
     };
-  }
-
-  componentDidMount() { 
-    this.takeData();
-  }
-
-  async takeData() {
-    const fetchedData = await getData();
-   
-    this.setState({
-      allFlights: fetchedData,
-    });
   }
 
   setCurrentPage = (pageType) => {
@@ -36,11 +22,11 @@ class App extends Component {
   }
 
   setCurrentDay = (day) => {
-    this.setState({ currentDay: day})
+    this.setState({ currentDay: day });
   }
 
   render() {
-    const { currentDay, currentPage} = this.state;
+    const { currentDay, currentPage } = this.state;
     return (
       <div className="App">
         <div className="typeContainer">
@@ -109,7 +95,7 @@ class App extends Component {
             <Flights
               currentDay={currentDay}
               type={currentPage}
-            /> 
+            />
           </tbody>
         </table>
       </div>

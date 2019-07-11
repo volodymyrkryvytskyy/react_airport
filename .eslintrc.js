@@ -7,11 +7,13 @@ module.exports = {
     browser: true
   },
   parserOptions: {
-    sourceType: "module"
+    sourceType: "module",
+    "ecmaVersion": 2017,
   },
   "globals": {
     it: false
   },
+  parser: "babel-eslint",
   rules: {
     
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
