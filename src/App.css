@@ -2,12 +2,12 @@
   margin: 0 auto;
 }
 
-.App {
+.app {
   margin: 0 auto;
   text-align: center;
 }
 
-.AppTable {
+.app__table {
   margin: auto;
   -webkit-box-shadow: 0 4px 24px 0 #85d5d9;
   -moz-box-shadow: 0 4px 24px 0 #85d5d9;
@@ -22,33 +22,32 @@
   border-collapse: collapse;
 }
 
-.tableHead,
-.AppTable tr:nth-child(even) {
+.app__table-head,
+.app__table tr:nth-child(even) {
   background-color: #85d5d9;
 }
 
-.departure-bg-img,
-.arrival-bg-img {
+.app__type-container-img {
   width: 40px;
   height: 40px;
 }
 
-.typeButton {
+.app__type-container-button {
   height: 40px;
   width: 120px;
 }
 
-.typeContainer {
+.app__type-container {
   display: flex;
   justify-content: center;
 }
 
-.pickADate {
+.app__date-container {
   display: flex;
   justify-content: center;
 }
 
-.pickADate .dateButton {
+.app__date-container .app__date-container-button {
   height: 25px;
   width: 80px;
 }

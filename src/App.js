@@ -28,23 +28,23 @@ class App extends Component {
   render() {
     const { currentDay, currentPage } = this.state;
     return (
-      <div className="App">
-        <div className="typeContainer">
+      <div className="app">
+        <div className="app__type-container">
           <img
             src="https://bit.ly/2YB0YpL"
             alt="departures"
-            className="departure-bg-img"
+            className="app__type-container-img"
           />
           <button
             onClick={() => this.setCurrentPage(TYPE_DEPARTURES)}
-            className="typeButton"
+            className="app__type-container-button"
             type="button"
           >
             Departures
           </button>
           <button
             onClick={() => this.setCurrentPage(TYPE_ARRIVALS)}
-            className="typeButton"
+            className="app__type-container-button"
             type="button"
           >
             Arrivals
@@ -52,35 +52,35 @@ class App extends Component {
           <img
             src="https://bit.ly/2xrC5Ri"
             alt="arrivals"
-            className="arrival-bg-img"
+            className="app__type-container-img"
           />
         </div>
-        <div className="pickADate">
+        <div className="app__date-container">
           <button
             type="button"
             onClick={() => this.setCurrentDay(YESTERDAY)}
-            className="dateButton"
+            className="app__date-container-button"
           >
             Yesterday
           </button>
           <button
             type="button"
             onClick={() => this.setCurrentDay(TODAY)}
-            className="dateButton"
+            className="app__date-container-button"
           >
             Today
           </button>
           <button
             type="button"
             onClick={() => this.setCurrentDay(TOMORROW)}
-            className="dateButton"
+            className="app__date-container-button"
           >
             Tomorrow
           </button>
         </div>
         <h3>{`${currentPage}s for ${currentDay}`}</h3>
-        <table className="AppTable">
-          <thead className="tableHead">
+        <table className="app__table">
+          <thead className="app__table-head">
             <tr>
               <th>Terminal</th>
               <th>Local Time</th>

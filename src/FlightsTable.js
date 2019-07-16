@@ -9,7 +9,7 @@ const FlightsTable = ({ flightsList, pageType }) => {
       .toTimeString()
       .slice(0, 5);
     return (
-      <tr className="flights" key={flight.fltNo + flight.status}>
+      <tr className="app__table-body-row" key={flight.fltNo + flight.status}>
         <td>{flight.term}</td>
         <td>{localTime}</td>
         <td>{flight['airportFromID.city'] || flight['airportToID.city']}</td>
